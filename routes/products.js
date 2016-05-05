@@ -5,9 +5,9 @@
 var http=require("http");
 exports.teas=function(req,res){
 
-
+console.log("Hello");
     var options = {
-        host: 'ec2-52-202-168-18.compute-1.amazonaws.com',
+        host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
         port: 7777,
         path: "/mongoserver/teas",
         method: 'GET'
@@ -37,11 +37,12 @@ exports.teas=function(req,res){
     http.get(options, callback).end();
 
 };
+
 exports.coffees=function(req,res){
 
 
     var options = {
-        host: 'ec2-52-202-168-18.compute-1.amazonaws.com',
+        host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
         port: 7777,
         path: "/mongoserver/coffees",
         method: 'GET'
@@ -75,7 +76,7 @@ exports.drinkwares=function(req,res){
 
 
     var options = {
-        host: 'ec2-52-202-168-18.compute-1.amazonaws.com',
+        host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
         port: 7777,
         path: "/mongoserver/drinkwares",
         method: 'GET'

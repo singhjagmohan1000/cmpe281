@@ -1,71 +1,135 @@
 /**
  * Created by Jagmohan on 4/9/16.
  */
-var mongo = require("./mongo");
-var mongoURL = "mongodb://localhost:27017/cmpe281";
-exports.login=function(req,res){
-
-    var email = req.param('username');
-    var password = req.param('password');
-    
-    mongo.connect(mongoURL, function(){
-        console.log('Connected to mongo at: ' + mongoURL);
-        var coll = mongo.collection('userDetails');
-        coll.findOne({"email:": email, "password":password }, function(err, user){
-            if(user)
-            {
-                console.log(user.email); 
-                res.status(200).send({"status":"Login Successful"});
-            } 
-            else
-            {
-                 res.status(401).send({"status":"Login Failed"});
-                
-            }
-        
-        });
-        
-    });
-   
-
-};
-
-exports.signup=function(req,res) {
-    var email = req.param('username');
-    var password = req.param('password');
-    var firstName = req.param('firstName');
-    var lastName = req.param('lastName');
-    var mobileNumber = req.param('mobileNumber');
+var http= require("http");
+exports.addCart=function(req,res){
+    var item = req.param('item_id');
+    var email = req.session.data.email;
+    var category=req.param('category');
+    var quan=req.param('quantity');
+    var count=0;
+    var c=quan;
+console.log(item);
     console.log(email);
-    console.log(password);
-    console.log(firstName);
-    console.log(lastName);
-    console.log(mobileNumber);
-    mongo.connect(mongoURL, function(){
-        console.log('Connected to mongo at: ' + mongoURL);
-        var coll = mongo.collection('userDetails');
-        coll.findOne({email: email}, function(err, user){
-            if(user)
-            {
-                // checking if user already exists
-                json_responses = {"statusCode" : 401};
-                res.send(json_responses);
-            }
+    var options = {
+        host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
+        port: 7777,
+        path: "/mongoserver/cart/addItem/"+email+"/"+category+"/"+item,
+        method: 'PUT'
+    };
+
+    callback = function(response) {
+        var str = '';
+
+        console.log(response.statusCode);
+        response.on('error',function(){
+            console.log("Error in response: "+"\n"+str);
+
+        })
+        response.on('data', function (chunk) {
+
+            str += chunk;
+
+        });
+
+
+        response.on('end', function () {
+
+            var data = JSON.parse(str);
+
+            console.log(response.statusCode);
+            count++;
+            console.log("hghjghgghfhgfghf"+count);
+            if(response.statusCode===200)
+            {console.log(data.items);
+                console.log(data.items.length);
+                if(count===c)
+                res.status(200).send(data);}
             else
-            {    
-                
-                coll.insertOne({"email": email,"firstName":firstName,"lastName":lastName,"password":password,"mobileNumber":mobileNumber}, function(err, user){
-                    if(err)
-                    {
-                        throw err;
-                    }
-                    else
-                        res.status(200).send({"status":"Registeration Success"});
-                });
-            }
-            });
-    });
-    
+                res.status(404).send({"data":"Failed to ad Cart"});
+        });
+    }
+    while(quan!=0)
+    {http.get(options, callback).end();
+        console.log(options);
+    quan--;
+    }
+
 };
+exports.getCart=function(req,res){
+
+    var email = req.session.data.email;
+console.log(email);
+    var options = {
+        host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
+        port: 7777,
+        path: "/mongoserver/cart/"+email,
+        method: 'GET'
+    };
+
+    callback = function(response) {
+        var str = '';
+
+        console.log(response.statusCode);
+        response.on('error',function(){
+            console.log("Error in response: "+"\n"+str);
+
+        })
+        response.on('data', function (chunk) {
+            str += chunk;
+        });
 
 
+        response.on('end', function () {
+            var data = JSON.parse(str);
+
+            console.log(response.statusCode);
+            if(response.statusCode===200)
+            { console.log(data.items);
+            console.log(data.items.length);
+                res.status(200).send(data);}
+            else
+                res.status(404).send({"data":"Failed to Get Cart"});
+        });
+    }
+
+    http.get(options, callback).end();
+
+};
+exports.removeCart=function(req,res){
+    var item = req.param('item_id');
+    var email = req.session.data.email;
+
+    var options = {
+        host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
+        port: 7777,
+        path: "/mongoserver/cart/addItem"+email+item,
+        method: 'PUT'
+    };
+
+    callback = function(response) {
+        var str = '';
+
+        console.log(response.statusCode);
+        response.on('error',function(){
+            console.log("Error in response: "+"\n"+str);
+
+        })
+        response.on('data', function (chunk) {
+            str += chunk;
+        });
+
+
+        response.on('end', function () {
+            var data = JSON.parse(str);
+            console.log(response.statusCode);
+            if(response.statusCode===200)
+                res.status(200).send(data);
+            else
+                res.status(404).send({"data":"Failed to remove item from Cart"});
+        });
+    }
+
+    http.get(options, callback).end();
+
+};

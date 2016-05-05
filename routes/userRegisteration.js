@@ -2,12 +2,17 @@
  * Created by Jagmohan on 4/9/16.
  */
 var http=require("http");
+exports.login1=function(req,res){
+    var email = req.param('username');
+    req.session.data=email;
+    res.status(200).send({"data":email});
+};
 exports.login=function(req,res){
     var email = req.param('username');
     var password = req.param('password');
 
     var options = {
-        host: 'ec2-52-202-168-18.compute-1.amazonaws.com',
+        host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
         port: 7777,
         path: "/mongoserver/login/"+email,
         method: 'GET'
@@ -41,10 +46,10 @@ http.get(options, callback).end();
 };
 
 exports.signup=function(req,res) {
-   var email = req.param('username');
+   var email = req.param('email');
    var password = req.param('password');
-   var firstName = req.param('firstName');
-   var lastName = req.param('lastName');
+   var firstName = req.param('uname');
+   var lastName = req.param('lname');
 
 var query=JSON.stringify({
     "userid" : email,
@@ -55,7 +60,7 @@ var query=JSON.stringify({
 );
 
 var options = {
-    host: 'ec2-52-202-168-18.compute-1.amazonaws.com',
+    host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
     port: 7777,
     path: '/mongoserver/signup',
     method: 'POST',
@@ -68,9 +73,9 @@ var options = {
 var reqPost = http.request(options, function (response) {
 
     if(response.statusCode===201)
-    res.status(200).send({"data":"Registration Successful"});
+    res.render('login');
     else
-    res.status(404).send({"data":"Registration Failed"});
+    res.render('login');
     response.on('data', function (data) {
         console.log('Posting Result:\n');
         process.stdout.write(data);
