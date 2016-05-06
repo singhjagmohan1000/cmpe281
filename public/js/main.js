@@ -2,9 +2,17 @@
  * JSON FOR COFFEE-TEA-DRINKWARES DATA
  */
 
-var app = angular.module('myApp', []);
-app.controller("Controller", ['$scope','$http' ,function($scope,$http) {
+var app = angular.module('myApp',[]);
+app.controller("Controller", ['$scope','$http','$window',function($scope,$http,$window) {
 $scope.cart=[];
+    $scope.caart=[];
+   var totalSum=function(){
+
+        var sum=0;
+       for(var i=0;i<$scope.cart.length;i++)
+        sum=sum+$scope.cart[i].price;
+        return sum;
+    };
     var flag=[];
 
     $http({
@@ -47,8 +55,7 @@ $scope.cart=[];
         alert("Failure");
     });
     $scope.addCart=function(item_id,category,quantity){
-        alert(quantity);
-        alert(category);
+
         item={"item_id":item_id,"category":category,"quantity":quantity};
         $http({
             method: 'POST',url: '/addCart',
@@ -60,10 +67,13 @@ $scope.cart=[];
 
                 if(! flag[items.item_id])
                 {flag[items.item_id] = true;
-                    $scope.cart.push({"item_id":items.item_id,"count":count,"price":items.price*count});}
+                    $scope.cart.push({"item_id":items.item_id,"count":count,"price":items.price*count});
+                    $scope.totalPrice+=items.price*count;
+                }
 
 
             })
+            $scope.totalPrice=totalSum();
             function  nCount(items)
             {var count = response.data.items.filter(function(d) { return d.item_id === items.item_id; }).length;
                 return count;}
@@ -74,17 +84,40 @@ $scope.cart=[];
             alert("Failure");
         });
     }
-   $scope.chkOut=function(cart){
-
-    //    item={"item_id":item_id};
+    $scope.calcTotal = function(item){
+        return 0+item.price;
+    }
+   $scope.rmvCart=function(item,quantity){
+       alert(quantity);
+flag=[];
+       $scope.cart=[];
+       item={"item_id":item,"quantity":quantity};
         $http({
-            method: 'POST',url: '/checkOut',
-            data: cart
+            method: 'POST',url: '/rmvCart',
+            data: item
         }).
         then(function(response) {
 
-            console.log(response.data);
-            alert("Product added");
+
+            angular.forEach(response.data.items,function(items){
+                var count=nCount(items);
+
+                if(! flag[items.item_id])
+                {flag[items.item_id] = true;
+                    $scope.cart.push({"item_id":items.item_id,"count":count,"price":items.price*count});
+                    $scope.totalPrice+=items.price*count;
+
+                }
+
+
+            })
+            $scope.totalPrice=totalSum();
+            function  nCount(items)
+            {var count = response.data.items.filter(function(d) { return d.item_id === items.item_id; }).length;
+                return count;}
+            console.log("***************"+$scope.cart);
+            $scope.bagItems=response.data.items.length;
+
 
         },function(response){
             alert("Failure");
@@ -106,10 +139,14 @@ $scope.cart=[];
 
                     if(! flag[items.item_id])
                     {flag[items.item_id] = true;
-                    $scope.cart.push({"item_id":items.item_id,"count":count,"price":items.price*count});}
+                    $scope.cart.push({"item_id":items.item_id,"count":count,"price":items.price*count});
+
+                    }
+
 
 
             })
+            $scope.totalPrice=totalSum();
            function  nCount(items)
             {var count = response.data.items.filter(function(d) { return d.item_id === items.item_id; }).length;
                 return count;}

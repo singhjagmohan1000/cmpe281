@@ -9,6 +9,7 @@ var express = require('express')
     ,userRegisteration = require('./routes/userRegisteration')
     ,products = require('./routes/products')
     ,cart = require('./routes/cart')
+    ,billing = require('./routes/billing')
   , http = require('http')
   , path = require('path');
 
@@ -43,7 +44,9 @@ app.get('/alltea',products.teas);
 app.get('/allDrinkware',products.drinkwares);
 app.post('/addCart',cart.addCart);
 app.get('/getCart',cart.getCart);
-app.post('/removeCart',cart.removeCart);
+app.get('/finalCart',billing.setCart)
+app.post('/rmvCart',cart.removeCart);
+app.post('/checkOut',billing.checkOut);
 //app.post('/bill',product.bill);
 
 http.createServer(app).listen(app.get('port'), function(){

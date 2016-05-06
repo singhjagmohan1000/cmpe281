@@ -12,6 +12,20 @@
 /*	Basic Style 
 /* =================================== */
 
+          .step_complete {
+              background: #357ebd;
+          }
+
+          .step {
+              float: left;
+              background: white;
+              padding: 7px 13px;
+              border-radius: 1px;
+              text-align: center;
+              width: 100px;
+              position: relative;
+          }
+
 #filter-tea,#filter-coffee,#filter-drinks{
     border-radius: 7px;
     background-color:#ffffff;

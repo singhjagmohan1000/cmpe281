@@ -2,6 +2,20 @@
  * Created by Jagmohan on 4/9/16.
  */
 var http= require("http");
+exports.checkOut=function(req,res){
+   var cart=req.param("cart");
+    console.log("*****************"+cart);
+    req.session.cart=cart;
+    res.render('checkout');
+
+};
+
+exports.setCart=function(req,res){
+    if(req.session.data)
+    res.status(200).send(req.session.cart)
+    else
+    res.status(200).send({"data":"No Item In Cart"});
+};
 exports.addCart=function(req,res){
     var item = req.param('item_id');
     var email = req.session.data.email;
@@ -39,7 +53,7 @@ console.log(item);
 
             console.log(response.statusCode);
             count++;
-
+            console.log("hghjghgghfhgfghf"+count);
             if(response.statusCode===200)
             {console.log(data.items);
                 console.log(data.items.length);
@@ -99,13 +113,11 @@ console.log(email);
 exports.removeCart=function(req,res){
     var item = req.param('item_id');
     var email = req.session.data.email;
-    var quan=req.param('quantity');
-    var count=0;
-    var c=quan;
+
     var options = {
         host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
         port: 7777,
-        path: "/mongoserver/cart/removeItem/"+email+"/"+item,
+        path: "/mongoserver/cart/addItem"+email+item,
         method: 'PUT'
     };
 
@@ -123,26 +135,15 @@ exports.removeCart=function(req,res){
 
 
         response.on('end', function () {
-
             var data = JSON.parse(str);
-
             console.log(response.statusCode);
-            count++;
-
             if(response.statusCode===200)
-            {console.log(data.items);
-                console.log(count+"*********");
-                if(count===c)
-                    res.status(200).send(data);}
+                res.status(200).send(data);
             else
-                res.status(404).send({"data":"Failed to ad Cart"});
+                res.status(404).send({"data":"Failed to remove item from Cart"});
         });
     }
 
-    while(quan!=0)
-    {http.get(options, callback).end();
-        console.log(options);
-        quan--;
-    }
+    http.get(options, callback).end();
 
 };

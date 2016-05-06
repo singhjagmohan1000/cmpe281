@@ -2,23 +2,26 @@
  * Created by Jagmohan on 4/9/16.
  */
 
-var app = angular.module('loginApp', []);
-app.controller('loginController', function ($http,$scope)
+var app = angular.module('billingApp', []);
+app.controller('chkOutController', function ($http,$scope)
 {
 
     $http({
         method: 'GET',
-        url: '/allProducts',
+        url: '/finalCart',
 
     }).
     then(function(response) {
 
-        alert("Product Successful");
+
         alert(response.data);
         console.log(response.data);
-        $scope.products=response.data;
+
+        $scope.cart=response.data;
 
     },function(response){
+        $scope.empty=response.data;
+        alert(response.data);
         alert("Failure");
     });
 
