@@ -91,7 +91,29 @@ $scope.cart=[];
     $scope.calcTotal = function(item){
         return 0+item.price;
     }
+    $scope.cancel=function(){
+        $scope.bill=$scope.cart;
+        $scope.percentage=1;
 
+        $http({
+            method: 'POST',url: '/checkOut',
+            data: $scope.cart
+        }).
+        then(function(response) {
+            $scope.orderPlaced=true;
+
+            $scope.cart=[];
+            $scope.bagItems=0;
+            $scope.noItem = true;
+            $scope.caart=true;
+            $scope.payment=false;
+            $scope.shipping=false;
+            $scope.placeOrder=true;
+
+        },function(response){
+
+        });
+    }
     $scope.buy=function(){
         $scope.bill=$scope.cart;
         $scope.percentage=100;
