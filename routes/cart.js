@@ -130,8 +130,8 @@ exports.removeCart=function(req,res){
             count++;
 
             if(response.statusCode===200)
-            {console.log(data.items);
-                console.log(count+"*********");
+            {
+
                 if(count===c)
                     res.status(200).send(data);}
             else

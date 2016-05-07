@@ -47,14 +47,14 @@
     top: -3px
 }
 .step_complete {
-    background: #357ebd
+    background: #66a268
 }
 .step_complete a.check-bc, .step_complete a.check-bc:hover,.afix-1,.afix-1:hover{
     color: #eee;
 }
 .step_line.step_complete {
     background: 0;
-    border-left: 16px solid #357ebd
+    border-left: 16px solid #66a268
 }
 .step_thankyou {
     float: left;
@@ -168,7 +168,7 @@ ol, ul {
   -ms-transition: all .2s;
   -o-transition: all .2s;
   transition: all .2s;
-  background-image: url('//c2.staticflickr.com/4/3713/20116660060_f1e51a5248_m.jpg');
+  background-image: url('https://demandware.edgesuite.net/aafv_prd/on/demandware.static/Sites-Starbucks-Site/-/default/dw11f25d0e/images/logo.png');
   background-position: 0 0;
   float: left;
   height: 32px;
@@ -237,7 +237,7 @@ ol, ul {
 }
 
 .panel-info {
-    border-color: #999;
+    border-color: #66a268;
 }
 
 .panel-heading {
@@ -252,7 +252,7 @@ ol, ul {
     border-color: #999;
 }
 .panel-info > .panel-heading {
-    background-image: linear-gradient(to bottom, #555 0px, #888 100%);
+    background-color: #66a268;
 }
 
 hr {
@@ -328,12 +328,17 @@ hr{
             <div class="row cart-head">
                 <div class="container">
                 <div class="row">
-                    <p></p>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" ng-style="{width : ( getPercentage() + '%' ) }">
+                            <span class="sr-only">90% Complete</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div style="display: table; margin: auto;">
-                        <span class="step step_complete"> <a href="#" class="check-bc">Cart</a> <span class="step_line step_complete"> </span> <span class="step_line backline"> </span> </span>
-                        <span class="step step_complete"> <a href="#" class="check-bc">Checkout</a> <span class="step_line "> </span> <span class="step_line step_complete"> </span> </span>
+                        <span class="step step_complete"> <a href="" ng-click="rCart()" class="check-bc">Bag</a> <span class="step_line step_complete"> </span> <span class="step_line backline"> </span> </span>
+                        <span class="step step_complete"> <a href="" ng-click="rAdd()"  class="check-bc">Shipping</a> <span class="step_line step_complete"> </span> <span class="step_line backline"> </span> </span>
+                        <span class="step step_complete"> <a href="" ng-click="rPay()" class="check-bc">Checkout</a> <span class="step_line "> </span> <span class="step_line step_complete"> </span> </span>
                         <span class="step_thankyou check-bc step_complete">Thank you</span>
                     </div>
                 </div>
@@ -344,16 +349,16 @@ hr{
             </div>    
             <div ng-hide="orderPlaced" class="row cart-body">
                 <form class="form-horizontal" method="post" action="">
-                <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
+                <div ng-show="caart" class="col-lg-12 col-md-12 col-sm-12 col-xs-24 ">
                     <!--REVIEW ORDER-->
-                    <div class="panel panel-info">
+                    <div  ng-hide="noItem" class="panel panel-info">
                         <div class="panel-heading">
                             Review Order <div class="pull-right"><small><a class="afix-1" href="#">Edit Cart</a></small></div>
                         </div>
                         <div class="panel-body">
                             <div ng-repeat="c in cart" class="form-group">
                                 <div class="col-sm-3 col-xs-3">
-                                    <img class="img-responsive" src="//c1.staticflickr.com/1/466/19681864394_c332ae87df_t.jpg" />
+                                    <img class="img-circle" width="50" height="50" class="img-responsive" src="http://demandware.edgesuite.net/aafv_prd/on/demandware.static/Sites-Starbucks-Site/-/default/dw11f25d0e/images/logo.png" />
                                 </div>
                                 <div class="col-sm-3 col-xs-3">
                                     <div class="col-xs-12">{{c.name}}</div>
@@ -371,7 +376,7 @@ hr{
                             <div class="form-group"><hr /></div>
                             <div class="form-group">
                                 <div class="col-xs-12">
-                                    <strong>Subtotal</strong>
+                                    <strong>Order Total</strong>
                                     <div class="pull-right"><span>$</span> <span>{{totalPrice}}</span></div>
                                 </div>
                                 <div class="col-xs-12">
@@ -379,12 +384,37 @@ hr{
                                     <div class="pull-right"><span>-</span></div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <h4>Shop More</h4>
+                                    <a href="#products" ng-click="cShop()" class="pull-right btn btn-success fa fa-thumbs-o-up" > <strong>Continue Shopping</strong></a>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div ng-show="noItem" class="panel panel-info">
+                        <div class="panel-heading">
+                            Review Order <div class="pull-right"><small><a class="afix-1" href="#">Edit Cart</a></small></div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="jumbotron">
+                                <h4>No Item In Bag</h4><h1 class="fa fa-shopping-cart" aria-hidden="true"></h1>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <h4>Shop Now</h4>
+                                    <a href="#products" ng-click="cShop()" class="pull-right btn btn-success fa fa-thumbs-o-up" > <strong>Shop Now</strong></a>
+                                </div>
+
+                            </div>
 
                         </div>
                     </div>
                     <!--REVIEW ORDER END-->
                 </div>
-                <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
+                <div ng-show="shipping" class="col-lg-12 col-md-12 col-sm-12 col-xs-24 ">
                     <!--SHIPPING METHOD-->
                     <div class="panel panel-info">
                         <div class="panel-heading">Address</div>
@@ -440,8 +470,10 @@ hr{
                             </div>
                         </div>
                     </div>
+                    </div>
                     <!--SHIPPING METHOD END-->
                     <!--CREDIT CART PAYMENT-->
+                    <div ng-show="payment" class="col-lg-12 col-md-12 col-sm-12 col-xs-24">
                     <div class="panel panel-info">
                         <div class="panel-heading"><span><i class="glyphicon glyphicon-lock"></i></span> Secure Payment</div>
                         <div class="panel-body">
@@ -517,7 +549,7 @@ hr{
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <button type="submit" ng-click="buy()" class="btn btn-primary btn-submit-fix">Place Order</button>
+                                    <button type="submit" ng-click="buy()" ng-disabled="placeOrder" class="btn btn-primary btn-submit-fix">Place Order</button>
                                 </div>
                             </div>
                         </div>
@@ -531,39 +563,53 @@ hr{
         <!--REVIEW ORDER-->
         <div class="panel panel-info">
             <div class="panel-heading ">
-                Order Placed <div class="pull-right"><small><a class="afix-1" href="#">Thank you</a></small></div>
+                Order Placed <div class="pull-right"><small><a class="afix-1" href="">Thank you</a></small></div>
                 <h4>Your Order Will Arrive Soon</h4>
 
 
             </div>
             <div class="panel-body">
-                <div ng-repeat="c in bill" class="form-group">
-                    <div class="col-sm-3 col-xs-4">
-                        <img class="img-responsive" src="//c1.staticflickr.com/1/466/19681864394_c332ae87df_t.jpg" />
-                    </div>
-                    <div class="col-sm-3 col-xs-4">
-                        <div class="col-xs-12"><span>{{c.name}}</span></div>
-                        <div class="col-xs-12"><small>Quantity:<span>{{c.count}}</span></small></div>
-                    </div>
-                    <div class="col-sm-3 col-xs-4 ">
-                        <h6><span>$</span>{{c.price}}</h6>
-                    </div>
+                <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
 
 
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="c in bill">
+
+                        <td>{{c.name}}</td>
+                        <td>{{c.count}}</td>
+                        <td>{{c.price}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+                <div class="form-group"><hr />
+                    <div class="col-xs-11">
+                        <strong>Order Total</strong>
+                        <div class="pull-right"><span>$</span> <span>{{totalPrice}}</span></div>
+                    </div>
                 </div>
-
-                <div class="form-group"><hr /></div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <strong>Subtotal</strong>
-                        <div class="pull-right"><span>$</span> <span>{{totalPrice}}</span></div>
+                        <h4>Shop More</h4>
+                        <a href="#products" ng-click="cShop()" class="pull-right btn btn-success fa fa-thumbs-o-up" > <strong>Continue Shopping</strong></a>
                     </div>
                     <div class="col-xs-12">
                         <small>Shipping</small>
                         <div class="pull-right"><span>-</span></div>
                     </div>
                 </div>
-
+            </div>
 
             </div>
         </div>

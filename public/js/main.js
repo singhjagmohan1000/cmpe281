@@ -7,7 +7,7 @@ app.controller("Controller", ['$scope','$http','$window',function($scope,$http,$
 $scope.cart=[];
     $scope.caart=[];
     $scope.address=true;
-    $scope.bill=true;
+    $scope.bill=0;
    var totalSum=function(){
 
         var sum=0;
@@ -81,6 +81,8 @@ $scope.cart=[];
                 return count;}
             console.log($scope.cart);
             $scope.bagItems=response.data.items.length;
+            $scope.noItem=false;
+            $scope.placeOrder=false;
 
         },function(response){
 
@@ -92,7 +94,7 @@ $scope.cart=[];
 
     $scope.buy=function(){
         $scope.bill=$scope.cart;
-
+        $scope.percentage=100;
 
         $http({
             method: 'POST',url: '/checkOut',
@@ -103,6 +105,12 @@ $scope.cart=[];
 
             $scope.cart=[];
             $scope.bagItems=0;
+            $scope.noItem = true;
+            $scope.caart=true;
+            $scope.payment=false;
+            $scope.shipping=false;
+            $scope.placeOrder=true;
+
         },function(response){
 
         });
@@ -120,7 +128,7 @@ $scope.cart=[];
 
         });
     }
-
+    $scope.percentage=30;
    $scope.rmvCart=function(item,quantity){
 
 flag=[];
@@ -132,7 +140,12 @@ flag=[];
         }).
         then(function(response) {
 
-
+            if(response.data.details){
+                $scope.bagItems=0;
+                $scope.noItem = true;
+                $scope.placeOrder=true;
+                $scope.totalPrice=0;
+            }
             angular.forEach(response.data.items,function(items){
                 var count=nCount(items);
 
@@ -144,19 +157,53 @@ flag=[];
 
 
             })
+            $scope.bagItems=response.data.items.length;
+
             $scope.totalPrice=totalSum();
             function  nCount(items)
             {var count = response.data.items.filter(function(d) { return d.item_id === items.item_id; }).length;
                 return count;}
             console.log("***************"+$scope.cart);
-            $scope.bagItems=response.data.items.length;
+
 
 
         },function(response){
 
+
         });
     }
 
+    $scope.caart=true;
+    $scope.payment=false;
+    $scope.shipping=false;
+        $scope.noItem = true;
+        $scope.placeOrder=true;
+
+    $scope.cShop=function(){
+        $scope.orderPlaced=false;
+        $scope.cart=[];
+
+    }
+    $scope.rAdd=function(){
+        $scope.shipping=true;
+        $scope.caart=false;
+        $scope.payment=false;
+        $scope.percentage=50;
+    }
+    $scope.rCart=function(){
+        $scope.caart=true;
+        $scope.payment=false;
+        $scope.shipping=false;
+        $scope.percentage=30;
+    }
+    $scope.rPay=function(){
+        $scope.caart=false;
+        $scope.payment=true;
+        $scope.shipping=false;
+        $scope.percentage=80;
+    }
+
+$scope.getPercentage=function(){return $scope.percentage;}
 
         $http({
             method: 'GET',url: '/getCart'
@@ -185,7 +232,8 @@ flag=[];
                 return count;}
             console.log($scope.cart);
            $scope.bagItems=response.data.items.length;
-
+            $scope.placeOrder=false;
+            $scope.noItem=false;
 
         },function(response){
 

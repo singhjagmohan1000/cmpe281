@@ -23,10 +23,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
+    <script>$('a[href="#"]').on('click', function(e) {
+            e.preventDefault();
+        });</script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 	<!-- Fontawesome Icon font -->
-
+<style>.scrollable-menu {
+        height: auto;
+        max-height: 300px;
+        overflow-x: hidden;
+    }</style>
 	<!-- bootstrap.min -->
 	<link rel="stylesheet" href="stylesheets/css/jquery.fancybox.css">
 	<!-- bootstrap.min -->
@@ -81,7 +87,7 @@ Fixed Navigation
 		<nav class="collapse navbar-collapse navbar-right" role="navigation">
 			<ul id="nav" class="nav navbar-nav">
 				<li><a href="#body">Home</a></li>
-				<li><a href="#service">Products</a></li>
+				<li><a href="#products">Products</a></li>
                 <li><a href="#analytics">Analytics</a></li>
 				<li><a href="#team">About us</a></li>
 				<!--<li><a href="#price">price</a></li> -->
@@ -89,8 +95,8 @@ Fixed Navigation
 					<a class="dropdown-toggle "  data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
 						MyBag <span class="badge">{{bagItems}}</span><span class="caret"/></a>
 
-					 <ul  class="dropdown-menu" >
-						<li class="dropdown-item" ng-repeat="c in cart"><span>{{c.name}}</span>&nbsp;&nbsp;&nbsp;{{c.price|currency}}</li>
+					 <ul  ng-hide="noItem" class="dropdown-menu scrollable-menu list-group" role="menu" >
+						<li class="dropdown-item list-group-item" ng-repeat="c in cart"><span>{{c.name}}</span>&nbsp;&nbsp;&nbsp;{{c.price|currency}}</li>
                          <div class="dropdown-divider"></div>
 						 <li><a href="#chkOut" class="btn btn-red ">Checkout</a></li>
 
@@ -98,6 +104,10 @@ Fixed Navigation
 
 
 					</ul>
+                     <ul  ng-show="noItem" class="dropdown-menu list-group" >
+                         <li class="dropdown-item list-group-item" ><span>No Item In Bag</span></li>
+
+                     </ul>
 
 				</li>
                 <li><a type="submit" href="" ng-click="logout()" >Log Out</a></li>
@@ -229,7 +239,7 @@ End Fixed Navigation
 
 
 	<!-- Service section -->
-	<section id="service">
+	<section id="products">
 		<div class="container">
 			<div class="row">
 
@@ -344,7 +354,7 @@ End Fixed Navigation
 										<div class="product-data" id ="price-lb" >${{ coffeedata.price }} / {{coffeedata.quantity}} lb</div>
 										<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-										<a href="#" ng-click="addCart(coffeedata.item_id,coffeedata.category,quantity)" class="btn btn-red btn-effect">Add to Bag</a>
+										<a href="" ng-click="addCart(coffeedata.item_id,coffeedata.category,quantity)" class="btn btn-red btn-effect">Add to Bag</a>
 									</div>
 								</div>
 								<br><br>
@@ -406,7 +416,7 @@ End Fixed Navigation
 										<input class="product-data" id="step-count-tea"style="color:black" type="number" ng-model="quantity" name="quantity" min="0" max="100">
 										<div class="product-data" id ="price-lb-tea" >${{ teadata.price }} / {{teadata.quantity}} lb</div>
 										<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<a href="#" ng-click="addCart(teadata.item_id,teadata.category,quantity)" class="btn btn-red btn-effect">Add to Cart</a>
+										<a href="" ng-click="addCart(teadata.item_id,teadata.category,quantity)" class="btn btn-red btn-effect">Add to Cart</a>
 									</div>
 								</div>
 								<br><br>
