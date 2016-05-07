@@ -18,7 +18,7 @@ angular.module('splashDemo', ['ui.splash'])
     then(function(response) {
 
       alert("Registeration Successful");
-      alert(response.data);
+
 
     },function(response){
       alert("Registeration Failure");
@@ -36,7 +36,7 @@ angular.module('splashDemo', ['ui.splash'])
     then(function(response) {
 
       alert("Login Successful");
-      alert(response.data.name);
+
       console.log(response.data);
       $window.location.href = '/';
     },function(response){

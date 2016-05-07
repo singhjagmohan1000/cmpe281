@@ -28,7 +28,7 @@ $scope.cart=[];
         $scope.teacataloge=response.data;
 
     },function(response){
-        alert("Failure");
+
     });
     $http({
         method: 'GET',
@@ -41,7 +41,7 @@ $scope.cart=[];
         $scope.drinkcataloge=response.data;
 
     },function(response){
-        alert("Failure");
+
     });
     $http({
         method: 'GET',
@@ -54,7 +54,7 @@ $scope.cart=[];
         $scope.coffecataloge=response.data;
 
     },function(response){
-        alert("Failure");
+
     });
     $scope.addCart=function(item_id,category,quantity){
 
@@ -83,7 +83,7 @@ $scope.cart=[];
             $scope.bagItems=response.data.items.length;
 
         },function(response){
-            alert("Failure");
+
         });
     }
     $scope.calcTotal = function(item){
@@ -100,11 +100,11 @@ $scope.cart=[];
         }).
         then(function(response) {
         $scope.orderPlaced=true;
-            alert("Final order Placed");
+
             $scope.cart=[];
             $scope.bagItems=0;
         },function(response){
-            alert("Failure");
+
         });
     }
     $scope.logout=function(){
@@ -117,12 +117,12 @@ $scope.cart=[];
         then(function(response) {
             $window.location.href = '/';
         },function(response){
-            alert("Failure");
+
         });
     }
 
    $scope.rmvCart=function(item,quantity){
-       alert(quantity);
+
 flag=[];
        $scope.cart=[];
        item={"item_id":item,"quantity":quantity};
@@ -153,7 +153,7 @@ flag=[];
 
 
         },function(response){
-            alert("Failure");
+
         });
     }
 
@@ -189,7 +189,7 @@ flag=[];
 
         },function(response){
 
-            alert(response.data)
+
         });
 
 

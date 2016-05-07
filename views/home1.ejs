@@ -82,8 +82,8 @@ Fixed Navigation
 			<ul id="nav" class="nav navbar-nav">
 				<li><a href="#body">Home</a></li>
 				<li><a href="#service">Products</a></li>
-
-				<li><a href="#testimonials">About us</a></li>
+                <li><a href="#analytics">Analytics</a></li>
+				<li><a href="#team">About us</a></li>
 				<!--<li><a href="#price">price</a></li> -->
 				 <li role="presentation" class="dropdown">
 					<a class="dropdown-toggle "  data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -195,7 +195,7 @@ End Fixed Navigation
     ==================================== -->
 
 	<!-- about section -->
-	<section id="about" >
+	<section id="team" >
 		<div id="team" class="container-fluid text-center">
 			<h2>Our Team</h2>
 			<br>
@@ -307,13 +307,13 @@ End Fixed Navigation
 			<div class="row">
 				<div class="col-md-1"></div>
 			<div class="col-md-3">
-				<b style="color:black">CAFFEINE</b> <input placeholder="Regular | Decaffinated" style="color:black;border-radius:7px" ng-model="search.type">
+				<b style="color:black">CAFFEINE</b> <input placeholder="Regular | Decaffinated" style="color:black;border-radius:7px" ng-model="caf.type">
 			</div>
 			<div class="col-md-3">
-				<b style="color:black">ROAST&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </b> <input placeholder="blonde | medium | dark" style="border-radius:7px;color:black" ng-model="search.roast">
+				<b style="color:black">ROAST&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </b> <input placeholder="blonde | medium | dark" style="border-radius:7px;color:black" ng-model="caf.roast">
 			</div>
 			<div class="col-md-3">
-				<b style="color:black">REGION&nbsp;&nbsp;&nbsp;  </b> <input placeholder="latin america | asia-pacific | multi | Dark"style="border-radius:7px;color:black" ng-model="search.region">
+				<b style="color:black">REGION&nbsp;&nbsp;&nbsp;  </b> <input placeholder="latin america | asia-pacific | multi | Dark"style="border-radius:7px;color:black" ng-model="caf.region">
 			</div>
 				<div class="col-md-1"></div>
 			</div>
@@ -325,7 +325,7 @@ End Fixed Navigation
 					<div>
 
 						<div class="row">
-							<div class= "col-md-4"  ng-repeat="coffeedata in coffecataloge | filter:search:strict">
+							<div class= "col-md-4"  ng-repeat="coffeedata in coffecataloge | filter:caf:strict">
 								<div id="product-box" style="width:620px;height:390px;" >
 									<div id ="individual-products"style="width:310px;height:395px;border:1px solid ;border-radius: 15px; background-color:#ffffff">
 										<div>&nbsp;&nbsp;&nbsp;
@@ -368,10 +368,10 @@ End Fixed Navigation
                 <div class="col-md-1">
                 </div>
                 <div class="col-md-5">
-                    <b style="color:black">TEA FORM</b> <input placeholder="Tea Bags | Latte Concentrate | K-Cup® Pods" style="color:black;border-radius:7px" ng-model="search.tea_form">
+                    <b style="color:black">TEA FORM</b> <input placeholder="Tea Bags | Latte Concentrate | K-Cup® Pods" style="color:black;border-radius:7px" ng-model="teaa.tea_form">
                 </div>
                 <div class="col-md-5">
-                    <b style="color:black">BRAND&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b> <input placeholder=" Tazo | Teavana" style="border-radius:7px;color:black" ng-model="search.brand">
+                    <b style="color:black">BRAND&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b> <input placeholder=" Tazo | Teavana" style="border-radius:7px;color:black" ng-model="teaa.brand">
                 </div>
                 <div class="col-md-1">
                 </div>
@@ -387,7 +387,7 @@ End Fixed Navigation
 
 						<div class="row">
 
-							<div class= "col-md-4" ng-repeat="teadata in teacataloge | filter:search:strict">
+							<div class= "col-md-4" ng-repeat="teadata in teacataloge | filter:teaa:strict">
 
 								<div id="product-box-tea" style="width:620px;height:390px ;" >
 									<div id ="individual-products-teas"style="width:310px;height:395px;border:1px solid #ffffff;border-radius: 15px;">
@@ -438,7 +438,7 @@ End Fixed Navigation
 					<div>
 
 						<div class="row">
-							<div class= "col-md-4"  ng-repeat="drinkdata in drinkcataloge | filter:search:strict">
+							<div class= "col-md-4"  ng-repeat="drinkdata in drinkcataloge | filter:drk:strict">
 								<div id="product-box-drink" style="width:620px;height:390px;" >
 									<div id ="individual-products-drinks"style="width:310px;height:395px;border:1px solid ;border-radius: 15px; background-color:#ffffff">
 										<div>&nbsp;&nbsp;&nbsp;
@@ -456,7 +456,7 @@ End Fixed Navigation
 										<input class="product-data" id="step-count-drink"style="color:black" type="number" ng-model="quantity" name="quantity" min="0" max="100">
 										<div class="product-data" id ="price-lb-drink" >${{ drinkdata.price }} / {{drinkdata.quantity}} lb</div>
 										<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<a href="#add-to-cart" ng-click="addCart(drinkdata.item_id,drinkdata.category,quantity)" class="btn btn-red btn-effect">Add to Cart</a>
+										<a href="" ng-click="addCart(drinkdata.item_id,drinkdata.category,quantity)" class="btn btn-red btn-effect">Add to Cart</a>
 									</div>
 								</div>
 								<br><br>
@@ -509,46 +509,295 @@ End Fixed Navigation
 	</section>
 	<!-- end CheckOut section -->
 	<!-- Contact section -->
-	<section id="contact" >
-		<div class="container">
-			<div class="row">
+    <section id="analytics">
+    <div class="container">
+        <div class="row">
 
-				<div class="sec-title text-center wow animated fadeInDown">
-					<h2>Contact</h2>
-					<p>Leave a Message</p>
-				</div>
+            <div class="sec-title text-center wow animated fadeInDown">
+                <h2>Real time analytics</h2>
+            </div>
+
+            <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+            <link href="stylesheets/monthpicker.css" rel="stylesheet" type="text/css">
+            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+            <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+
+            <link rel="stylesheet" type="text/css" media="screen" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
+            <p>Choose the month you wish to view the logs for:</p> <input id="demo-1" type="text" />
+        </div>
+
+        <script src="js/monthpicker.js"></script>
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <script>
+            var monthselected ="";
+            $('#demo-1').Monthpicker({
+                dateFormat: 'yymmdd',
+                onSelect: function (dateText, inst) {
+                    var dateStringForApi = $('#demo-1').val();
+                    if (dateStringForApi == "02/2016") {
+                        monthselected = "february";
+                    }
+                    if (dateStringForApi == "03/2016") {
+                        monthselected = "march";
+                    }
+                    if (dateStringForApi == "01/2016") {
+                        monthselected = "january";
+                    }
+                    if (dateStringForApi == "04/2016") {
+                        monthselected = "april";
+                    }
+
+                    fiterdata(monthselected);
+                }
+            });
+
+            var fiterdata =function(monthselected) {
+                var analytics = [{
+                    "month": "january",
+                    "category": "coffee",
+                    "price": 50,
+                    "name": "Pike Place Roast Brewed Coffee",
+                    "flavor": "flavored",
+                    "count": 500,
+                    "roast": "medium",
+                    "type": "regular"
+                },
+                    {
+                        "month": "january",
+                        "category": "coffee",
+                        "price": 40,
+                        "name": "Starbucks VIA Ready Brew",
+                        "flavor": "flavored",
+                        "count": 548,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "january",
+                        "category": "coffee",
+                        "price": 50,
+                        "name": "Starbucks Caffé Verona",
+                        "flavor": "flavored",
+                        "count": 57,
+                        "roast": "medium",
+                        "type": "regular"
+                    },
+                    {
+                        "month": "january",
+                        "category": "coffee",
+                        "price": 20,
+                        "name": "Starbucks Caffè K-Cup",
+                        "flavor": "flavored",
+                        "count": 39,
+                        "roast": "dark",
+                        "type": "regular"
+                    },
+                    {
+                        "month": "january",
+                        "category": "coffee",
+                        "price": 40,
+                        "name": "Milk Verismo Pods",
+                        "flavor": "flavored",
+                        "count": 233,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "february",
+                        "category": "coffee",
+                        "price": 50,
+                        "name": "Starbucks VIA Ready Brew",
+                        "flavor": "flavored",
+                        "count": 50,
+                        "roast": "medium",
+                        "type": "regular"
+                    },
+                    {
+                        "month": "february",
+                        "category": "coffee",
+                        "price": 40,
+                        "name": "Guatemala Antigua Espresso ",
+                        "flavor": "flavored",
+                        "count": 97,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "february",
+                        "category": "coffee",
+                        "price": 90,
+                        "name": "Starbucks Caffé Verona ",
+                        "flavor": "flavored",
+                        "count": 47,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "february",
+                        "category": "coffee",
+                        "price": 20,
+                        "name": "Starbucks VIA Ready Brew",
+                        "flavor": "flavored",
+                        "count": 287,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "february",
+                        "category": "coffee",
+                        "price": 45,
+                        "name": "Pike Place Roast Brewed Coffee",
+                        "flavor": "flavored",
+                        "count": 87,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "march",
+                        "category": "coffee",
+                        "price": 65,
+                        "name": "Guatemala Antigua  Pods",
+                        "flavor": "flavored",
+                        "count": 287,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "march",
+                        "category": "coffee",
+                        "price": 75,
+                        "name": "Starbucks Bright Sky Blend ",
+                        "flavor": "flavored",
+                        "count": 387,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "march",
+                        "category": "coffee",
+                        "price": 55,
+                        "name": "Starbucks Vanilla",
+                        "flavor": "flavored",
+                        "count": 87,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "march",
+                        "category": "coffee",
+                        "price": 95,
+                        "name": "Starbucks Mocha K-Cup",
+                        "flavor": "flavored",
+                        "count": 587,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "march",
+                        "category": "coffee",
+                        "price": 195,
+                        "name": "Starbucks Dark Roast",
+                        "flavor": "flavored",
+                        "count": 587,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "march",
+                        "category": "coffee",
+                        "price": 65,
+                        "name": "Fair Trade Certified  Cafè",
+                        "flavor": "flavored",
+                        "count": 200,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "april",
+                        "category": "coffee",
+                        "price": 65,
+                        "name": "Fair Trade Certified  Cafè",
+                        "flavor": "flavored",
+                        "count": 150,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "april",
+                        "category": "coffee",
+                        "price": 65,
+                        "name": "Starbucks Reserve Eastern",
+                        "flavor": "flavored",
+                        "count": 250,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "april",
+                        "category": "coffee",
+                        "price": 65,
+                        "name": "Guatemala Antigua Espresso Verismo Pods",
+                        "flavor": "flavored",
+                        "count": 350,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "april",
+                        "category": "coffee",
+                        "price": 65,
+                        "name": "Sulawesi, Whole Bean",
+                        "flavor": "flavored",
+                        "count": 650,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "april",
+                        "category": "coffee",
+                        "price": 65,
+                        "name": "Starbucks VIA Ready Brew",
+                        "flavor": "flavored",
+                        "count": 450,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    }
+                ]
+
+                var result = analytics.filter(function (value) {
+                    console.log(monthselected)
+                    return value.month === monthselected;   // or whatever you filter on
+                });
+                console.log(result);
 
 
-				<div class="col-md-7 contact-form wow animated fadeInLeft">
-					<form action="#" method="post">
-						<div class="input-field">
-							<input type="text" name="name" class="form-control" placeholder="Your Name...">
-						</div>
-						<div class="input-field">
-							<input type="email" name="email" class="form-control" placeholder="Your Email...">
-						</div>
-						<div class="input-field">
-							<input type="text" name="subject" class="form-control" placeholder="Subject...">
-						</div>
-						<div class="input-field">
-							<textarea name="message" class="form-control" placeholder="Messages..."></textarea>
-						</div>
-						<button type="submit" id="submit" class="btn btn-blue btn-effect">Send</button>
-					</form>
-				</div>
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    theme: "theme2",//theme1
+                    title: {
+                        text: "Real time analytics of our Products for " +monthselected+ " 2016"
+                    },
+                    animationEnabled: true,   // change to true
+                    data: [
+                        {
+                            type: "column",
+                            dataPoints: [
+                                {label: result[0]["name"], y: result[0]["count"]},
+                                {label: result[1]["name"], y: result[1]["count"]},
+                                {label: result[2]["name"], y: result[2]["count"]},
+                                {label: result[3]["name"], y: result[3]["count"]},
+                                {label: result[4]["name"], y: result[4]["count"]}
+                            ]
+                        }
+                    ]
+                });
+                chart.render();
+            }
 
-				<div class="col-md-5 wow animated fadeInRight">
-					<address class="contact-details">
-						<h3>Contact Us</h3>
-						<p><i class="fa fa-pencil"></i>Phoenix Inc.<span>PO Box 345678</span> <span>Little Lonsdale St, Melbourne </span><span>Australia</span></p><br>
-						<p><i class="fa fa-phone"></i>Phone: (415) 124-5678 </p>
-						<p><i class="fa fa-envelope"></i>website@yourname.com</p>
-					</address>
-				</div>
+        </script>
 
-			</div>
-		</div>
-	</section>
+    </div>
+    </section>
 	<!-- end Contact section -->
 
 
