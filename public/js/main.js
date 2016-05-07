@@ -6,6 +6,8 @@ var app = angular.module('myApp',[]);
 app.controller("Controller", ['$scope','$http','$window',function($scope,$http,$window) {
 $scope.cart=[];
     $scope.caart=[];
+    $scope.address=true;
+    $scope.bill=true;
    var totalSum=function(){
 
         var sum=0;
@@ -67,7 +69,7 @@ $scope.cart=[];
 
                 if(! flag[items.item_id])
                 {flag[items.item_id] = true;
-                    $scope.cart.push({"item_id":items.item_id,"count":count,"price":items.price*count});
+                    $scope.cart.push({"item_id":items.item_id,"name":items.name,"count":count,"price":items.price*count});
                     $scope.totalPrice+=items.price*count;
                 }
 
@@ -87,6 +89,38 @@ $scope.cart=[];
     $scope.calcTotal = function(item){
         return 0+item.price;
     }
+
+    $scope.buy=function(){
+        $scope.bill=$scope.cart;
+
+
+        $http({
+            method: 'POST',url: '/checkOut',
+            data: $scope.cart
+        }).
+        then(function(response) {
+        $scope.orderPlaced=true;
+            alert("Final order Placed");
+            $scope.cart=[];
+            $scope.bagItems=0;
+        },function(response){
+            alert("Failure");
+        });
+    }
+    $scope.logout=function(){
+
+
+
+        $http({
+            method: 'GET',url: '/logout'
+        }).
+        then(function(response) {
+            $window.location.href = '/';
+        },function(response){
+            alert("Failure");
+        });
+    }
+
    $scope.rmvCart=function(item,quantity){
        alert(quantity);
 flag=[];
@@ -102,11 +136,10 @@ flag=[];
             angular.forEach(response.data.items,function(items){
                 var count=nCount(items);
 
-                if(! flag[items.item_id])
-                {flag[items.item_id] = true;
-                    $scope.cart.push({"item_id":items.item_id,"count":count,"price":items.price*count});
-                    $scope.totalPrice+=items.price*count;
-
+                if(! flag[items.item_id]) {
+                    flag[items.item_id] = true;
+                    $scope.cart.push({"item_id": items.item_id,"name":items.name,"count": count, "price": items.price * count});
+                    $scope.totalPrice += items.price * count;
                 }
 
 
@@ -139,7 +172,7 @@ flag=[];
 
                     if(! flag[items.item_id])
                     {flag[items.item_id] = true;
-                    $scope.cart.push({"item_id":items.item_id,"count":count,"price":items.price*count});
+                    $scope.cart.push({"item_id":items.item_id,"name":items.name,"count":count,"price":items.price*count});
 
                     }
 

@@ -12,19 +12,7 @@
 /*	Basic Style 
 /* =================================== */
 
-          .step_complete {
-              background: #357ebd;
-          }
 
-          .step {
-              float: left;
-              background: white;
-              padding: 7px 13px;
-              border-radius: 1px;
-              text-align: center;
-              width: 100px;
-              position: relative;
-          }
 
 #filter-tea,#filter-coffee,#filter-drinks{
     border-radius: 7px;
@@ -786,7 +774,7 @@ ul.external li a:hover {
 }
 
 #testimonials .overlay {
-    background-color: rgba(15,155,224, 0.78);
+    background-color: #e9eae4;
     padding: 70px 0 40px;
 }
 
@@ -1512,7 +1500,7 @@ textarea.form-control {
 }
 
 #coffee-list .overlay {
-    background-color: rgba(15,155,224, 0.78);
+    background-color: #e9eae4;
     padding: 70px 0 40px;
 }
 
@@ -1598,7 +1586,7 @@ textarea.form-control {
 }
 
 #tea-list .overlay {
-    background-color: rgba(15,155,224, 0.78);
+    background-color: #e9eae4;
     padding: 70px 0 40px;
 }
 
@@ -1681,7 +1669,7 @@ textarea.form-control {
 }
 
 #drinks-list .overlay {
-    background-color: rgba(15,155,224, 0.78);
+    background-color: #e9eae4;
     padding: 70px 0 40px;
 }
 

@@ -90,5 +90,10 @@ reqPost.on('error', function (e) {
     console.error(e);
 });
 };
+exports.logout=function(req,res){
+    req.session.destroy();
+    res.render('login');
+
+}
 
 

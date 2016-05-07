@@ -342,9 +342,9 @@ hr{
                 </div>
                 </div>
             </div>    
-            <div class="row cart-body">
+            <div ng-hide="orderPlaced" class="row cart-body">
                 <form class="form-horizontal" method="post" action="">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
+                <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
                     <!--REVIEW ORDER-->
                     <div class="panel panel-info">
                         <div class="panel-heading">
@@ -356,7 +356,7 @@ hr{
                                     <img class="img-responsive" src="//c1.staticflickr.com/1/466/19681864394_c332ae87df_t.jpg" />
                                 </div>
                                 <div class="col-sm-3 col-xs-3">
-                                    <div class="col-xs-12">Product name</div>
+                                    <div class="col-xs-12">{{c.name}}</div>
                                     <div class="col-xs-12"><small>Quantity:<span>{{c.count}}</span></small></div>
                                 </div>
                                 <div class="col-sm-3 col-xs-3 ">
@@ -384,7 +384,7 @@ hr{
                     </div>
                     <!--REVIEW ORDER END-->
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
+                <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
                     <!--SHIPPING METHOD-->
                     <div class="panel panel-info">
                         <div class="panel-heading">Address</div>
@@ -394,12 +394,7 @@ hr{
                                     <h4>Shipping Address</h4>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-12"><strong>Country:</strong></div>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" name="country" value="" />
-                                </div>
-                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-6 col-xs-12">
                                     <strong>First Name:</strong>
@@ -522,7 +517,7 @@ hr{
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <button type="submit" class="btn btn-primary btn-submit-fix">Place Order</button>
+                                    <button type="submit" ng-click="buy()" class="btn btn-primary btn-submit-fix">Place Order</button>
                                 </div>
                             </div>
                         </div>
@@ -532,6 +527,48 @@ hr{
                 
                 </form>
             </div>
+    <div ng-show="orderPlaced" class="col-lg-12">
+        <!--REVIEW ORDER-->
+        <div class="panel panel-info">
+            <div class="panel-heading ">
+                Order Placed <div class="pull-right"><small><a class="afix-1" href="#">Thank you</a></small></div>
+                <h4>Your Order Will Arrive Soon</h4>
+
+
+            </div>
+            <div class="panel-body">
+                <div ng-repeat="c in bill" class="form-group">
+                    <div class="col-sm-3 col-xs-4">
+                        <img class="img-responsive" src="//c1.staticflickr.com/1/466/19681864394_c332ae87df_t.jpg" />
+                    </div>
+                    <div class="col-sm-3 col-xs-4">
+                        <div class="col-xs-12"><span>{{c.name}}</span></div>
+                        <div class="col-xs-12"><small>Quantity:<span>{{c.count}}</span></small></div>
+                    </div>
+                    <div class="col-sm-3 col-xs-4 ">
+                        <h6><span>$</span>{{c.price}}</h6>
+                    </div>
+
+
+                </div>
+
+                <div class="form-group"><hr /></div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <strong>Subtotal</strong>
+                        <div class="pull-right"><span>$</span> <span>{{totalPrice}}</span></div>
+                    </div>
+                    <div class="col-xs-12">
+                        <small>Shipping</small>
+                        <div class="pull-right"><span>-</span></div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!--REVIEW ORDER END-->
+    </div>
             <div class="row cart-footer">
         
             </div>

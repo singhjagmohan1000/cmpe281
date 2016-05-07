@@ -90,7 +90,8 @@ Fixed Navigation
 						MyBag <span class="badge">{{bagItems}}</span><span class="caret"/></a>
 
 					 <ul  class="dropdown-menu" >
-						<li ng-repeat="c in cart">{{c.price|currency}}</li>
+						<li class="dropdown-item" ng-repeat="c in cart"><span>{{c.name}}</span>&nbsp;&nbsp;&nbsp;{{c.price|currency}}</li>
+                         <div class="dropdown-divider"></div>
 						 <li><a href="#chkOut" class="btn btn-red ">Checkout</a></li>
 
 						 </li>
@@ -99,6 +100,7 @@ Fixed Navigation
 					</ul>
 
 				</li>
+                <li><a type="submit" href="" ng-click="logout()" >Log Out</a></li>
 			</ul>
 		</nav>
 		<!-- /main nav -->
@@ -194,35 +196,33 @@ End Fixed Navigation
 
 	<!-- about section -->
 	<section id="about" >
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 wow animated fadeInLeft">
-					<div class="recent-works">
-						<h3>Recent Works</h3>
-						<div id="works">
-							<div class="work-item">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br> <br> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-							</div>
-							<div class="work-item">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br><br> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-							</div>
-							<div class="work-item">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br><br> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-							</div>
-						</div>
-					</div>
+		<div id="team" class="container-fluid text-center">
+			<h2>Our Team</h2>
+			<br>
+			<div class="row slideanim">
+				<div class="col-sm-3">
+					<img class="img-circle" src="images/pooja.jpg" alt="pooja" width="100" height="100">
+					<h4>Pooja Yelure</h4>
+					<a target="_blank" href="https://www.linkedin.com/in/poojayelure" style="text-decoration:none;"><span style="font: 80% Arial,sans-serif; color:#0783B6;"><img src="https://static.licdn.com/scds/common/u/img/webpromo/btn_in_20x15.png" width="20" height="15" alt="View Pooja  Yelure's LinkedIn profile" style="vertical-align:middle;" border="0">&nbsp;View Pooja Yelure's profile</span></a>
 				</div>
-				<div class="col-md-7 col-md-offset-1 wow animated fadeInRight">
-					<div class="welcome-block">
-						<h3>Welcome To Our Site</h3>
-						<div class="message-body">
-							<img src="img/member-1.jpg" class="pull-left" alt="member">
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-						</div>
-						<a href="#" class="btn btn-border btn-effect pull-right">Read More</a>
-					</div>
+				<div class="col-sm-3">
+					<img class="img-circle" src="images/shubham.jpg" alt="Shubham" width="100" height="100">
+					<h4>Shubham Vadhera</h4>
+					<a target="_blank" href="https://www.linkedin.com/in/shubhamvadhera" style="text-decoration:none;"><span style="font: 80% Arial,sans-serif; color:#0783B6;"><img src="https://static.licdn.com/scds/common/u/img/webpromo/btn_in_20x15.png" width="20" height="15" alt="View Shubham Vadhera's LinkedIn profile" style="vertical-align:middle;" border="0">&nbsp;View Shubham Vadhera's profile</span></a>
+				</div>
+				<div class="col-sm-3">
+					<img class="img-circle" src="images/sagar.jpg" alt="sagar" width="100" height="100">
+					<h4>Sagar Dafle</h4>
+					<a target="_blank" href="https://www.linkedin.com/in/sagardafle" style="text-decoration:none;"><span style="font: 80% Arial,sans-serif; color:#0783B6;"><img src="https://static.licdn.com/scds/common/u/img/webpromo/btn_in_20x15.png" width="20" height="15" alt="View Saga Dafle's LinkedIn profile" style="vertical-align:middle;" border="0">&nbsp;View Sagar Dafle's profile</span></a>
+				</div>
+
+				<div class="col-sm-3">
+					<img class="img-circle" src="images/jagmohan.jpg" alt="Jagmohan" width="100" height="100">
+					<h4 style="color:#303030;">Jagmohan Singh</h4>
+					<a target="_blank" href="https://www.linkedin.com/pub/jagmohan-singh/36/182/708" style="text-decoration:none;"><span style="font: 80% Arial,sans-serif; color:#0783B6;"><img src="https://static.licdn.com/scds/common/u/img/webpromo/btn_in_20x15.png" width="20" height="15" alt="View Jagmohan Singh's LinkedIn profile" style="vertical-align:middle;" border="0">&nbsp;View Jagmohan Singh's profile</span></a>
 				</div>
 			</div>
+
 		</div>
 	</section>
 	<!-- end about section -->
@@ -241,10 +241,10 @@ End Fixed Navigation
 				<div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn">
 					<div class="service-item">
 						<div class="service-icon">
-							<i class="fa fa-heart fa-3x"></i>
+							<i class="fa fa-coffee fa-3x"></i>
 						</div>
 						<h3>Coffee</h3>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+
 					</div>
 					<div class ="view-coffee-list">
 						<a href="#coffee-list" class="btn btn-blue btn-effect">Buy Now!</a>
@@ -257,7 +257,8 @@ End Fixed Navigation
 							<i class="fa fa-leaf fa-3x"></i>
 						</div>
 						<h3>Tea</h3>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+
+
 					</div>
 					<div class ="view-tea-list">
 						<a href="#tea-list" class="btn btn-blue btn-effect">Buy Now!</a>
@@ -270,7 +271,7 @@ End Fixed Navigation
 							<i class="fa fa-beer fa-3x"></i>
 						</div>
 						<h3>Drinkwares</h3>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+
 					</div>
 					<div class ="view-drinks-list">
 						<a href="#drinks-list" class="btn btn-blue btn-effect">Buy Now!</a>
@@ -283,7 +284,7 @@ End Fixed Navigation
 							<i class="fa fa-code-fork fa-3x"></i>
 						</div>
 						<h3>Github</h3>
-						<p>Fully working system implementation can be found here. </p>
+
 
 					</div>
 					<div class ="github-fork">
@@ -303,18 +304,24 @@ End Fixed Navigation
 	<!-- Coffee-list -->
 	<section id="coffee-list" class="parallax">
 		<div class="overlay">
-			<div class="container">
+			<div class="row">
+				<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<b style="color:black">CAFFEINE</b> <input placeholder="Regular | Decaffinated" style="color:black;border-radius:7px" ng-model="search.type">
+			</div>
+			<div class="col-md-3">
+				<b style="color:black">ROAST&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </b> <input placeholder="blonde | medium | dark" style="border-radius:7px;color:black" ng-model="search.roast">
+			</div>
+			<div class="col-md-3">
+				<b style="color:black">REGION&nbsp;&nbsp;&nbsp;  </b> <input placeholder="latin america | asia-pacific | multi | Dark"style="border-radius:7px;color:black" ng-model="search.region">
+			</div>
+				<div class="col-md-1"></div>
+			</div>
+            <br><br>
+            <hr>
+				<div class="container">
 				<div class="row">
-					<b>Narrow by</b><br>
-					<div class="sec-title text-center white wow animated fadeInDown">
-						<div id ="filter-coffee">
-							<br>
-							<b style="color:black">CAFFEINE</b> <input placeholder="Regular | Decaffinated" style="color:black;border-radius:7px" ng-model="search.type"><br><br>
-							<b style="color:black">ROAST&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </b> <input placeholder="blonde | medium | dark" style="border-radius:7px;color:black" ng-model="search.roast"><br><br>
-							<b style="color:black">REGION&nbsp;&nbsp;&nbsp;  </b> <input placeholder="latin america | asia-pacific | multi | Dark"style="border-radius:7px;color:black" ng-model="search.region"><br><br>
-						</div>
-						<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buy your favourite coffee now</h2>
-					</div>
+
 					<div>
 
 						<div class="row">
@@ -357,19 +364,25 @@ End Fixed Navigation
 	<section id="tea-list" class="parallax">
 
 		<div class="overlay">
-			<div class="container">
-				<div class="row">
-					<b>Narrow by</b><br>
-					<div class="sec-title text-center white wow animated fadeInDown">
-						<div id ="filter-tea">
-							<br>
-							<b style="color:black">TEA FORM</b> <input placeholder="Tea Bags | Latte Concentrate | K-Cup® Pods" style="color:black;border-radius:7px" ng-model="search.tea_form"><br><br>
-							<b style="color:black">BRAND&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b> <input placeholder=" Tazo | Teavana" style="border-radius:7px;color:black" ng-model="search.brand"><br><br>
-						</div>
-						<h2>Grab your favorite Tea!</h2>
-					</div>
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-5">
+                    <b style="color:black">TEA FORM</b> <input placeholder="Tea Bags | Latte Concentrate | K-Cup® Pods" style="color:black;border-radius:7px" ng-model="search.tea_form">
+                </div>
+                <div class="col-md-5">
+                    <b style="color:black">BRAND&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b> <input placeholder=" Tazo | Teavana" style="border-radius:7px;color:black" ng-model="search.brand">
+                </div>
+                <div class="col-md-1">
+                </div>
 
-					<div>
+
+            </div>
+            <br><br>
+            <hr>
+
+			<div class="container">
+
 
 
 						<div class="row">

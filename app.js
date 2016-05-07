@@ -44,10 +44,12 @@ app.get('/alltea',products.teas);
 app.get('/allDrinkware',products.drinkwares);
 app.post('/addCart',cart.addCart);
 app.get('/getCart',cart.getCart);
-app.get('/finalCart',billing.setCart)
+app.get('/logout',userRegisteration.logout);
 app.post('/rmvCart',cart.removeCart);
 app.post('/checkOut',billing.checkOut);
-//app.post('/bill',product.bill);
+
+//app.get('*',errorPage.errorPage);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

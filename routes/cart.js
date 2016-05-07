@@ -50,7 +50,7 @@ console.log(item);
         });
     }
     while(quan!=0)
-    {http.get(options, callback).end();
+    {http.request(options, callback).end();
         console.log(options);
     quan--;
     }
@@ -140,7 +140,7 @@ exports.removeCart=function(req,res){
     }
 
     while(quan!=0)
-    {http.get(options, callback).end();
+    {http.request(options, callback).end();
         console.log(options);
         quan--;
     }
