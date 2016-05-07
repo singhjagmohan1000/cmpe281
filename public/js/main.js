@@ -188,7 +188,7 @@ flag=[];
 
 
         },function(response){
-            alert("Failure");
+
             alert(response.data)
         });
 
