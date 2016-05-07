@@ -35,7 +35,7 @@ angular.module('splashDemo', ['ui.splash'])
     }).
     then(function(response) {
 
-      alert("Login Successful");
+
 
       console.log(response.data);
       $window.location.href = '/';
