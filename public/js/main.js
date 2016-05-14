@@ -97,7 +97,10 @@ $scope.cart=[];
 
         $http({
             method: 'POST',url: '/checkOut',
-            data: $scope.cart
+            data: $.param($scope.cart),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
         }).
         then(function(response) {
             $scope.orderPlaced=true;
@@ -124,7 +127,7 @@ $scope.cart=[];
         }).
         then(function(response) {
         $scope.orderPlaced=true;
-
+    $scope.confirmOrder=response.data.data;
             $scope.cart=[];
             $scope.bagItems=0;
             $scope.noItem = true;
@@ -134,6 +137,15 @@ $scope.cart=[];
             $scope.placeOrder=true;
 
         },function(response){
+            $scope.confirmOrder=response.data.data;
+            $scope.orderPlaced=true;
+            $scope.cart=[];
+            $scope.bagItems=0;
+            $scope.noItem = true;
+            $scope.caart=true;
+            $scope.payment=false;
+            $scope.shipping=false;
+            $scope.placeOrder=true;
 
         });
     }

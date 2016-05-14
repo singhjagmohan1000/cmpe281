@@ -2,58 +2,62 @@
  * Created by Jagmohan on 4/9/16.
  */
 var http= require("http");
+var Mongo=require('./mongo');
+var async=require('async');
 exports.addCart=function(req,res){
     var item = req.param('item_id');
     var email = req.session.data.email;
     var category=req.param('category');
     var quan=req.param('quantity');
     var count=0;
-    var c=quan;
-console.log(item);
-    console.log(email);
+
     var options = {
-        host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
-        port: 7777,
+        host: Mongo.URL,
+        port: Mongo.PORT,
         path: "/mongoserver/cart/addItem/"+email+"/"+category+"/"+item,
         method: 'PUT'
     };
 
-    callback = function(response) {
-        var str = '';
-
-        console.log(response.statusCode);
-        response.on('error',function(){
-            console.log("Error in response: "+"\n"+str);
-
-        })
-        response.on('data', function (chunk) {
-
-            str += chunk;
-
-        });
-
-
-        response.on('end', function () {
-
-            var data = JSON.parse(str);
-
-            console.log(response.statusCode);
+    async.whilst(
+        function () { return count < quan; },
+        function (callback) {
             count++;
+            console.log(count);
+
+            http.request(options,function(response){
+                var str='';
+
+                response.on('error',function(){
+                    console.log("Error in response: "+"\n"+str);
+
+                })
+                response.on('data', function (chunk) {
+                    str += chunk;
+                });
+
+
+                response.on('end', function () {
+
+                    var data = JSON.parse(str);
+
+                    console.log(response.statusCode);
+                    callback(null,count,response,data);
+
+
+                });
+
+            }).end();
+        },
+        function (err, n,response,data) {
+
 
             if(response.statusCode===200)
-            {console.log(data.items);
-                console.log(data.items.length);
-                if(count===c)
-                res.status(200).send(data);}
+                res.status(200).send(data);
             else
-                res.status(404).send({"data":"Failed to ad Cart"});
-        });
-    }
-    while(quan!=0)
-    {http.request(options, callback).end();
-        console.log(options);
-    quan--;
-    }
+                res.status(404).send({"data":"Failed to Get Cart"});
+        }
+    );
+
 
 };
 exports.getCart=function(req,res){
@@ -61,8 +65,8 @@ exports.getCart=function(req,res){
     var email = req.session.data.email;
 console.log(email);
     var options = {
-        host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
-        port: 7777,
+        host: Mongo.URL,
+        port: Mongo.PORT,
         path: "/mongoserver/cart/"+email,
         method: 'GET'
     };
@@ -101,48 +105,53 @@ exports.removeCart=function(req,res){
     var email = req.session.data.email;
     var quan=req.param('quantity');
     var count=0;
-    var c=quan;
+
     var options = {
-        host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
-        port: 7777,
+        host: Mongo.URL,
+        port: Mongo.PORT,
         path: "/mongoserver/cart/removeItem/"+email+"/"+item,
         method: 'PUT'
     };
 
-    callback = function(response) {
-        var str = '';
-
-        console.log(response.statusCode);
-        response.on('error',function(){
-            console.log("Error in response: "+"\n"+str);
-
-        })
-        response.on('data', function (chunk) {
-            str += chunk;
-        });
-
-
-        response.on('end', function () {
-
-            var data = JSON.parse(str);
-
-            console.log(response.statusCode);
+    async.whilst(
+        function () { return count < quan; },
+        function (callback) {
             count++;
+            console.log(count);
+
+            http.request(options,function(response){
+                var str='';
+
+                response.on('error',function(){
+                    console.log("Error in response: "+"\n"+str);
+
+                })
+                response.on('data', function (chunk) {
+                    str += chunk;
+                });
+
+
+                response.on('end', function () {
+
+                    var data = JSON.parse(str);
+
+                    console.log(response.statusCode);
+                    callback(null,count,response,data);
+
+
+                });
+
+            }).end();
+        },
+        function (err, n,response,data) {
+
 
             if(response.statusCode===200)
-            {
-
-                if(count===c)
-                    res.status(200).send(data);}
+                res.status(200).send(data);
             else
-                res.status(404).send({"data":"Failed to ad Cart"});
-        });
-    }
+                res.status(404).send({"data":"Failed to Get Cart"});
+        }
+    );
 
-    while(quan!=0)
-    {http.request(options, callback).end();
-        console.log(options);
-        quan--;
-    }
 
 };

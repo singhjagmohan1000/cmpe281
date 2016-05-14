@@ -2,6 +2,7 @@
  * Created by Jagmohan on 4/9/16.
  */
 var http=require("http");
+var Mongo= require('./mongo');
 exports.login1=function(req,res){
     var email = req.param('username');
     req.session.data=email;
@@ -12,8 +13,8 @@ exports.login=function(req,res){
     var password = req.param('password');
 
     var options = {
-        host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
-        port: 7777,
+        host: Mongo.URL,
+        port: Mongo.PORT,
         path: "/mongoserver/login/"+email,
         method: 'GET'
     };
@@ -60,8 +61,8 @@ var query=JSON.stringify({
 );
 
 var options = {
-    host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
-    port: 7777,
+    host: Mongo.URL,
+    port: Mongo.PORT,
     path: '/mongoserver/signup',
     method: 'POST',
     headers: {

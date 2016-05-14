@@ -2,19 +2,20 @@
  * Created by Jagmohan on 4/9/16.
  */
 var http= require("http");
-
+var Mongo=require('./mongo');
+var async=require('async');
 exports.checkOut=function(req,res){
 
     var email = req.session.data.email;
     console.log(email);
     var options = {
-        host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
-        port: 7777,
+        host: Mongo.URL,
+        port: Mongo.PORT,
         path: "/mongoserver/cart/"+email,
         method: 'DELETE'
     };
 
-    callback = function(response) {
+    httpGet = function(response) {
         var str = '';
 
         console.log(response.statusCode);
@@ -33,12 +34,89 @@ exports.checkOut=function(req,res){
             console.log(response.statusCode);
             if(response.statusCode===200)
             {
-                res.status(200).send(data);}
+                console.log("Success");}
             else
-                res.status(404).send({"data":"Failed to Get Cart"});
+                console.log("Fail");
         });
     }
+    http.get(options, httpGet).end();
 
-    http.get(options, callback).end();
+    var status=[];
+    async.each(req.body,function(items,callback){
+    var count=0;
+        var stat=true;
+
+        console.log(items.count);
+        console.log(items.item_id);
+
+        async.whilst(
+            function () { return count < items.count; },
+            function (callback) {
+                count++;
+                console.log(count);
+                var options1 = {
+                    host: Mongo.URL,
+                    port: Mongo.PORT,
+                    path: "/mongoserver/inventory/removeOne/"+items.item_id,
+                    method: 'PUT'
+                };
+
+                http.request(options1,function(response){
+                    var str='';
+
+                    response.on('error',function(){
+                        console.log("Error in response: "+"\n"+str);
+
+                    })
+                    response.on('data', function (chunk) {
+                        str += chunk;
+                    });
+
+
+                    response.on('end', function () {
+
+                        var data = JSON.parse(str);
+
+                        console.log(response.statusCode);
+                        callback(null,count,response,data);
+
+
+                    });
+
+                }).end();
+            },
+            function (err, n,response,data) {
+
+
+                if(response.statusCode===200)
+                    console.log(status);
+                else
+                {
+                   status.push({"dataa":"dskjfdskkj"});
+                    res.status(404).send({"data":"Your Order might be delayed"});
+                }
+            }
+        );
+
+callback(null,status);
+    },function(err,status){
+        if(err){
+            console.log("Error Occured");
+        }
+        else{console.log("jo");
+            //if(status.length>0)
+                //res.status(404).send({"data":"Your Order might be delayed"});
+
+           // else
+                //res.status(200).send({"data":"Order Successful"});
+
+        }
+
+    });
+
+
+
+
+
 
 };

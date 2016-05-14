@@ -3,12 +3,13 @@
  */
 
 var http=require("http");
+var Mongo=require('./mongo');
 exports.teas=function(req,res){
 
 console.log("Hello");
     var options = {
-        host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
-        port: 7777,
+        host: Mongo.URL,
+        port: Mongo.PORT,
         path: "/mongoserver/teas",
         method: 'GET'
     };
@@ -42,8 +43,8 @@ exports.coffees=function(req,res){
 
 
     var options = {
-        host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
-        port: 7777,
+        host: Mongo.URL,
+        port: Mongo.PORT,
         path: "/mongoserver/coffees",
         method: 'GET'
     };
@@ -76,8 +77,8 @@ exports.drinkwares=function(req,res){
 
 
     var options = {
-        host: 'ec2-52-72-113-55.compute-1.amazonaws.com',
-        port: 7777,
+        host: Mongo.URL,
+        port: Mongo.PORT,
         path: "/mongoserver/drinkwares",
         method: 'GET'
     };
