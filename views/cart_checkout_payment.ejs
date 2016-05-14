@@ -608,7 +608,12 @@ hr{
                         <a href="#products" ng-click="cShop()" class="pull-right btn btn-success fa fa-thumbs-o-up" > <strong>Continue Shopping</strong></a>
                     </div>
                     <div class="col-xs-12">
-                        <strong>{{confirmOrder}}</strong>
+                        <div ng-hide="orderShow" class="alert alert-success">
+                            <strong>{{confirmOrder}}</strong>
+                        </div>
+                        <div ng-show="orderShow" class="alert alert-danger">
+                            <strong>{{confirmOrder}}</strong>
+                        </div>
                         <div class="pull-right"><span>-</span></div>
                     </div>
                 </div>

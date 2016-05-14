@@ -135,9 +135,11 @@ $scope.cart=[];
             $scope.payment=false;
             $scope.shipping=false;
             $scope.placeOrder=true;
+            $scope.orderShow=false;
 
         },function(response){
             $scope.confirmOrder=response.data.data;
+            $scope.orderShow=true;
             $scope.orderPlaced=true;
             $scope.cart=[];
             $scope.bagItems=0;
