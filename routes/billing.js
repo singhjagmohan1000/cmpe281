@@ -55,7 +55,7 @@ exports.checkOut=function(req,res){
                 count++;
                 console.log(count);
                 var options1 = {
-                    host: Mongo.URL,
+                    host: 'ec2-52-202-168-18.compute-1.amazonaws.com',
                     port: Mongo.PORT,
                     path: "/mongoserver/inventory/removeOne/"+items.item_id,
                     method: 'PUT'
@@ -89,7 +89,7 @@ exports.checkOut=function(req,res){
 
 
                 if(response.statusCode===200)
-                    console.log(status);
+                    res.status(200).send({"data":"Your Order is successful"});
                 else
                 {
                    status.push({"dataa":"dskjfdskkj"});
