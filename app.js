@@ -41,11 +41,16 @@ app.post('/signup',userRegisteration.signup);
 app.post('/login',userRegisteration.login);
 app.get('/allCoffee',products.coffees);
 app.get('/alltea',products.teas);
+
 app.get('/allDrinkware',products.drinkwares);
 app.post('/addCart',cart.addCart);
+
+
 app.get('/getCart',cart.getCart);
 app.get('/logout',userRegisteration.logout);
 app.post('/rmvCart',cart.removeCart);
+//This isjust testing hahah
+//hkhfkjshfkjs
 app.post('/checkOut',billing.checkOut);
 
 //app.get('*',errorPage.errorPage);
